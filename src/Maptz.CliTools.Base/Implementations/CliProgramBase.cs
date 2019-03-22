@@ -12,6 +12,8 @@ namespace Maptz.CliTools
     /// <typeparam name="TSettings"></typeparam>
     public abstract class CliProgramBase<TSettings> where TSettings : class
     {
+        public int ExitCode { get; set; }
+
         /* #region Protected Methods */
         protected virtual void AddServices(IServiceCollection services)
         {
@@ -31,14 +33,17 @@ namespace Maptz.CliTools
             try
             {
                 program.RunAsync(this.Args).GetAwaiter().GetResult();
+                
             }
             catch (CommandParsingException ex)
             {
                 consoleInstance.WriteErrorLine(ex.Message.ToString());
+                this.ExitCode = -2;
             }
             catch (Exception ex)
             {
                 consoleInstance.WriteErrorLine(ex.Message.ToString());
+                this.ExitCode = -1; 
             }
 
         }
