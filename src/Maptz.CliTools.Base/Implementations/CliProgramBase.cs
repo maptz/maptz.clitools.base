@@ -56,8 +56,8 @@ namespace Maptz.CliTools
         /* #region Public Constructors */
         public CliProgramBase(string[] args)
         {
-            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            this.Args = args;
+            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"); 
+            this.Args = args;  
             var maptzSettingsPathUnexpanded = $"%AppData%/Maptz/{this.GetType().Assembly.GetName().Name}.json";
             var maptzSettingsPath = Environment.ExpandEnvironmentVariables(maptzSettingsPathUnexpanded);
             var builder = new ConfigurationBuilder()
